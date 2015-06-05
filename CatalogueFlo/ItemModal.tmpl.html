@@ -1,0 +1,40 @@
+﻿<md-dialog msd-wheel="modalMouseWheel($event, $delta, $deltaX, $deltaY)" aria-label="{{::selectedItem.Nom}}">
+
+    <div class="modal-header">
+
+        <a class="iconedLink close-button" ng-click="closeDialog()">
+            <div class="inline-flex">
+                <md-icon class="md-icon" md-svg-src="images/close.svg"></md-icon>
+            </div>
+        </a>
+
+
+        <div layout="column" layout-align="center center">
+            <h1 class="modal-title title" style="margin-top:12px">
+                {{::selectedItem.Prenom}} {{::selectedItem.Nom|uppercase}}
+            </h1>
+        </div>
+
+        <tag item="selectedItem" entityname="'Item'" fieldname="'Auteurs'"></tag>
+        <tag item="selectedItem" entityname="'Item'" fieldname="'Tags'"></tag>
+        <div ng-file-drop ng-model="files" class="drop-box drop-zone clickable form-control" drag-over-class="dragover" multiple="false"
+             allow-dir="false" accept="*" ng-file-select="" ng-file-change="updateAttachment($files, $event, 'Image')">
+            <img style="width:300px" ng-src="{{::parentScope.apiRootUrl}}/{{selectedItem.Image}}" />
+            <div class="placeholder" ng-hide="selectedItem.Image">
+                <p class="inner-placeholder">
+                    <i class="fa fa-download fa-2 inner-placeholder " />
+                </p>
+            </div>
+        </div>
+
+
+
+    </div>
+    <md-content>
+        <div class="modal-wrapper">
+            <div class="modal-body">
+                
+            </div>
+        </div>
+    </md-content>
+</md-dialog>

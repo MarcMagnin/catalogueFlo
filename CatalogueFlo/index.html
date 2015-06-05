@@ -1,0 +1,82 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Catalogue Flo</title>
+    <link href="bower_components/angular-material/modules/js/core/core.css" rel="stylesheet" />
+    <link href="bower_components/angular-material/modules/js/backdrop/backdrop.css" rel="stylesheet" />
+    <link href="bower_components/angular-material/modules/js/dialog/dialog.css" rel="stylesheet" />
+    <link href="css/tile.min.css" rel="stylesheet" />
+    <link href="css/fontawesome.min.css" rel="stylesheet" />
+    <link href="css/dropbox.min.css" rel="stylesheet" />
+   
+</head>
+
+
+
+<body ng-app="Catalogue" ng-controller="catalogueAdm" ng-init="init()">
+    <script type="text/ng-template" id="SearchTemplate.html">
+        <a>
+            <span bind-html-unsafe="match.model.Val | typeaheadHighlight:query"></span>
+        </a>
+    </script>
+    <div class="toolbar">
+        <button class="btn btn-success" ng-click="add($event)">
+            +
+        </button>
+    </div>
+
+    <div id="searchbutton" style="z-index:50">
+        <div id="searchIcon" class="md-icon-container ">
+            <md-icon md-svg-src="images/search.svg"></md-icon>
+        </div>
+        <p class="toobar-button-label">Recherche</p>
+        <input type="text"
+               id="search2"
+               ng-model='searchedText'
+               ng-change='validateSearch($viewValue)'
+               typeahead="val as val.Val for val in searchSuggestions($viewValue)"
+               typeahead-loading="loadingSearchSuggestions"
+               typeahead-template-url="SearchTemplate.html"
+               typeahead-wait-ms="300"
+               typeahead-on-select="validateSearchFromLivre($item, $model, $label, $viewValue)"
+               class="form-control form-control-inline transparentInput searchBar" />
+    </div>
+
+    <div id="Container" class="tileContainer u-fancy-scrollbar">
+        <div class="mix tile {{item.filter}}" ng-repeat="item in items" ng-click="select(item, $event)">
+            <button class="close close-override" title="supprimer"
+                    ng-click="delete(item, $event)">
+                <i>X</i>
+            </button>
+
+            <img ng-src="{{::apiRootUrl}}/{{item.Image}}" class="tile-image"></img>
+        </div>
+    </div>
+
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="js/jquery.mixitup.js"></script>
+
+    <!-- angular -->
+    <script src="bower_components/angular/angular.min.js"></script>
+
+    <!-- angular  adds -->
+    <script src="bower_components/angular-file-upload-master/dist/angular-file-upload-shim.js"></script>
+    <script src="bower_components/angular-file-upload-master/dist/angular-file-upload.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+
+    <!-- material -->
+    <script src="js/hammer.js"></script>
+    <script src="bower_components/angular-material/modules/js/core/core.min.js"></script>
+    <script src="bower_components/angular-material/modules/js/backdrop/backdrop.min.js"></script>
+    <script src="bower_components/angular-material/modules/js/dialog/dialog.min.js"></script>
+
+    <!-- app -->
+    <script src="js/tools.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/directives/tag.js"></script>
+    <script src="js/services/services.js"></script>
+    <script src="js/controllers/catalogueAdm.js"></script>
+    <script src="js/controllers/itemModalController.js"></script>
+
+</body>
+</html>
