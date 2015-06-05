@@ -14,7 +14,7 @@ app.directive('tag', function ($http, $rootScope) {
             '</div>' +
              '<p><input type="text" ' +
                 'ng-model="new_value"' +
-                'typeahead="tags.Name for tags in getData($viewValue) | filter:$viewValue" ' +
+                'typeahead="tags.Val for tags in getData($viewValue) | filter:$viewValue" ' +
                 'typeahead-loading="loading" ' +
                 'typeahead-on-select="onSelect($item, $model, $label)"' +
                 'class="form-control"></input></p>',
@@ -45,9 +45,9 @@ app.directive('tag', function ($http, $rootScope) {
             $scope.loading = false;
             $scope.getData = function (value) {
                 $scope.loading = true;
-                return $http.get($rootScope.apiRootUrl + '/indexes/' + $scope.entityname, {
+                return $http.get($rootScope.apiRootUrl + '/indexes/' + $scope.fieldname, {
                     params: {
-                        query: "Name:" + value + "*",
+                        query: "Val:" + value + "*",
                         pageSize: 10,
                         _: Date.now(),
                     }
