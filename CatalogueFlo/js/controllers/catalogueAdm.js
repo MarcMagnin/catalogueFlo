@@ -10,7 +10,7 @@ var Update = function () {
     this.Name = "";
 };
 
-app.controller("catalogueAdm", function ($scope, $rootScope, $http, $timeout, $q, itemService, $filter, $mdDialog) {
+app.controller("catalogueAdm", function ($scope, $rootScope, $http, $timeout, $q, itemService, $filter, $mdDialog,$upload) {
     //$rootScope.apiRootUrl = "http://62.23.104.30:8181/databases/catalogueFlo";
     $rootScope.apiRootUrl = "http://localhost:8088/databases/catalogueFlo";
 
@@ -124,15 +124,86 @@ app.controller("catalogueAdm", function ($scope, $rootScope, $http, $timeout, $q
             }
         })
     }
-    $scope.add = function ($event) {
-        var item = new Item;
-        $scope.selectedItem = item;
+
+    $scope.addByDragAndDrop = function ($files, $event, $rejectedFiles) {
+        var prom = [];
+        angular.forEach($files, function (file, key) {
+            var item = new Item;
+            //livre.datePublication = moment().format();
+            var defer = $q.defer();
+            prom.push(defer.promise);
+            $scope.addItem(item).success(function (data, status, headers, config) {
+                item.Id = data.Key;
+                $timeout(function () {
+                    $scope.items.unshift(item);
+                    $scope.$apply();
+                    $("#Container").mixItUp('filter', $scope.searchPattern);
+                })
+
+                defer.resolve();
+                var fileReader = new FileReader();
+                fileReader.onload = function (e) {
+                    $upload.http({
+                        url: $rootScope.apiRootUrl + '/static/' + item.Id + '/' + file.name,
+                        method: "PUT",
+                        headers: { 'Content-Type': file.type },
+                        data: e.target.result
+                    }).progress(function (evt) {
+                        // Math.min is to fix IE which reports 200% sometimes
+                        //   $scope.progress[index] = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
+                        console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
+                    }).success(function (data, status, headers, config) {
+                        // mise à jour du livre avec l'URI de l'image
+                        $scope.setAttachment(file.name, item, 'Image');
+
+                    }).error(function (err) {
+                        alert('Error occured during upload');
+                    });
+                }
+                fileReader.readAsArrayBuffer(file);
+            }).
+            error(function (data, status, headers, config) {
+                console.log(data);
+            });
+        });
+        $q.all(prom).finally(function () {
+            $scope.sort();
+        });
+
+    };
+    $scope.setAttachment = function (fileName, item, fieldName) {
+        var attachmentUrl = 'static/' + item.Id + '/' + fileName;
+        var update = new Update();
+        update.Type = 'Set';
+        update.Name = fieldName;
+        update.Value = attachmentUrl;
         $http({
+            method: 'PATCH',
+            headers: { 'Raven-Entity-Name': $scope.entityName },
+            url: $rootScope.apiRootUrl + '/docs/' + item.Id,
+            data: angular.toJson(new Array(update))
+        }).
+            success(function (data, status, headers, config) {
+                item[fieldName] = attachmentUrl;
+                console.log(fieldName)
+            }).
+            error(function (data, status, headers, config) {
+                console.log(data);
+            });
+    };
+
+    $scope.addItem = function (item) {
+        return $http({
             method: 'PUT',
             headers: { 'Raven-Entity-Name': $scope.entityName },
             url: $rootScope.apiRootUrl + '/docs/' + $scope.entityName + '%2F',
             data: angular.toJson(item)
-        }).success(function (data, status, headers, config) {
+        })
+    }
+    $scope.add = function ($event) {
+        var item = new Item;
+        $scope.selectedItem = item;
+        $scope.addItem(item).success(function (data, status, headers, config) {
             item.Id = data.Key;
             $mdDialog.show({
                 targetEvent: $event,

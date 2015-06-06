@@ -42,7 +42,11 @@
                class="form-control form-control-inline transparentInput searchBar" />
     </div>
 
-    <div id="Container" class="tileContainer u-fancy-scrollbar">
+    <div id="Container" class="tileContainer drop-box u-fancy-scrollbar"
+         ng-file-drop ng-model="files"
+         drag-over-class="dragover" multiple="true"
+         allow-dir="false" accept="image/*"
+         ng-file-change="addByDragAndDrop($files, $event)">
         <div class="mix tile {{item.filter}}" ng-repeat="item in items" ng-click="select(item, $event)">
             <button class="close close-override" title="supprimer"
                     ng-click="delete(item, $event)">

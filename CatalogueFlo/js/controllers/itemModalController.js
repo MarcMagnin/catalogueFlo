@@ -33,7 +33,7 @@
                      console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
                  }).success(function (data, status, headers, config) {
                      // mise à jour du livre avec l'URI de l'image
-                     $scope.setAttachment(file.name, item, fieldName);
+                     $scope.parentScope.setAttachment(file.name, item, fieldName);
 
                  }).error(function (err) {
                      alert('Error occured during upload');
@@ -42,24 +42,4 @@
          fileReader.readAsArrayBuffer(file);
 
      };
-    $scope.setAttachment = function (fileName, item, fieldName) {
-        var attachmentUrl = 'static/' + item.Id + '/' + fileName;
-        var update = new Update();
-        update.Type = 'Set';
-        update.Name = fieldName;
-        update.Value = attachmentUrl;
-        $http({
-            method: 'PATCH',
-            headers: { 'Raven-Entity-Name': $scope.parentScope.entityName },
-            url: $rootScope.apiRootUrl + '/docs/' + item.Id,
-            data: angular.toJson(new Array(update))
-        }).
-            success(function (data, status, headers, config) {
-                item[fieldName] = attachmentUrl;
-                console.log(fieldName)
-            }).
-            error(function (data, status, headers, config) {
-                console.log(data);
-            });
-    };
 });
