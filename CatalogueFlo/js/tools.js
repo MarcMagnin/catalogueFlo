@@ -4,6 +4,17 @@
             return false;
         return this.get(0).scrollHeight > this.get(0).clientHeight;
     }
+
+
+    //var options = {
+    //    dragLockToAxis: true,
+    //    dragBlockHorizontal: true
+    //};
+    //var hammertime = new Hammer(document.getElementById('Container'), options);
+    //hammertime.on("dragleft dragright swipeleft swiperight panleft panright", function (ev) {
+    //    // disable browser scrolling
+    //    ev.gesture.preventDefault();
+    //});
 })(jQuery);
 
 function sortByDate(a, b) {

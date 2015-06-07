@@ -1,4 +1,9 @@
-﻿.center-content {
+﻿html,
+body {
+  background: #373737;
+  color: #f3f3f3;
+}
+.center-content {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;

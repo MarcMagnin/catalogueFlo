@@ -1,10 +1,10 @@
 ﻿@import "ressources";
 
 .tileContainer {
-    height: ~"-moz-calc(100% - 215px) " !important;
-    height: ~"-webkit-calc(100% - 215px)" !important;
-    height: ~"-o-calc(100% - 215px)" !important;
-    height: ~"calc(100% - 215px)" !important;
+    height: ~"-moz-calc(100% - 115px) " !important;
+    height: ~"-webkit-calc(100% - 115px)" !important;
+    height: ~"-o-calc(100% - 115px)" !important;
+    height: ~"calc(100% - 115px)" !important;
     overflow: auto;
     -webkit-box-sizing: content-box !important;
     -moz-box-sizing: content-box !important;
@@ -12,9 +12,9 @@
     display: -ms-flexbox;
     display: -webkit-flex;
     display: flex;
-    -webkit-flex-direction: column;
-    -ms-flex-direction: column;
-    flex-direction: column;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
     -webkit-flex-wrap: wrap;
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
@@ -28,14 +28,10 @@
     -webkit-align-items: flex-start;
     -ms-flex-align: start;
     align-items: flex-start;
+    -ms-touch-action: pan-x pan-y !important;
+    touch-action: pan-x pan-y !important;
 }
 
-.tileContainerAdmin {
-    height: ~"-moz-calc(100% - 20px) " !important;
-    height: ~"-webkit-calc(100% - 20px)" !important;
-    height: ~"-o-calc(100% - 20px)" !important;
-    height: ~"calc(100% - 20px)" !important;
-}
 
 .tileContainer .item,
 .tileContainer .gap {
@@ -48,8 +44,8 @@
 }
 
 .tile {
-    height: 266px;
-    width: 180px;
+    max-height: 300px;
+    max-width: 300px;
     margin: 0 0 30px 35px;
     -o-transition: background .3s;
     -moz-transition: background .3s;
@@ -74,10 +70,11 @@
 }
 
 .tile-image {
-    width: 180px;
-
+        max-height: 300px;
+    max-width: 300px;
     > img {
-        width: 180px;
+            max-height: 300px;
+    max-width: 300px;
         -webkit-border-radius: 2px;
         -moz-border-radius: 2px;
         border-radius: 2px;

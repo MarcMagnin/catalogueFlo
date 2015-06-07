@@ -10,7 +10,7 @@ var Update = function () {
     this.Name = "";
 };
 
-app.controller("catalogueAdm", function ($scope, $rootScope, $http, $timeout, $q, itemService, $filter, $mdDialog,$upload) {
+app.controller("catalogueAdm", function ($scope, $rootScope, $http, $timeout, $q, itemService, $filter, $mdDialog, $upload) {
     //$rootScope.apiRootUrl = "http://62.23.104.30:8181/databases/catalogueFlo";
     $rootScope.apiRootUrl = "http://localhost:8088/databases/catalogueFlo";
 
@@ -35,13 +35,14 @@ app.controller("catalogueAdm", function ($scope, $rootScope, $http, $timeout, $q
                   item.filter = "";
                   item.Id = item['@metadata']['@id'];
 
+                  console.log(item.Auteurs);
 
                   item.filter += item.Auteurs.map(function (val) {
                       return 'f-' + cleanString(val);
                   }).join(' ');
 
 
-                  item.filter += " "+ item.Tags.map(function (val) {
+                  item.filter += " " + item.Tags.map(function (val) {
                       return 'f-' + cleanString(val);
                   }).join(' ');
 
@@ -224,7 +225,7 @@ app.controller("catalogueAdm", function ($scope, $rootScope, $http, $timeout, $q
                 $scope.$apply();
                 $("#Container").mixItUp('filter', $scope.searchPattern);
             })
-            
+
             //$("#Container").mixItUp('append', $('.tile'));
 
         }).
@@ -243,17 +244,21 @@ app.controller("catalogueAdm", function ($scope, $rootScope, $http, $timeout, $q
 
         $scope.searchTimeout = setTimeout(function () {
             var searchPattern;
-            if ($scope.searchedText.Titre) {
 
-                $scope.searchPatternRecherche = $scope.searchedText.Titre.split(" ").map(function (val) {
+            var aim = ""
+
+            if ($scope.searchedText.Val) {
+                var aim = $scope.searchedText.Val;
+            } else if ($scope.searchedText) {
+                aim = $scope.searchedText;
+            }
+            if (aim) {
+                $scope.searchPatternRecherche = aim.split(" ").map(function (val) {
                     return '[class*=\'f-' + cleanString(val) + '\']';
                 }).join('');
-
-                console.log($scope.searchPatternRecherche)
-            } else {
-                $scope.searchPatternRecherche = $scope.searchedText.split(" ").map(function (val) {
-                    return '[class*=\'f-' + cleanString(val) + '\']';
-                }).join('');
+            }
+            else {
+                $scope.searchPatternRecherche = "";
             }
 
             $scope.validateFilter();
@@ -262,12 +267,13 @@ app.controller("catalogueAdm", function ($scope, $rootScope, $http, $timeout, $q
 
 
     $scope.validateFilter = function () {
-        var searchPattern =  ($scope.searchPatternRecherche ? $scope.searchPatternRecherche : '')
+        var searchPattern = ($scope.searchPatternRecherche ? $scope.searchPatternRecherche : '')
         if (searchPattern.length == 0)
             $scope.searchPattern = "*"
         else {
             $scope.searchPattern = searchPattern;
         }
+        console.log("Search" + $scope.searchPattern)
         filter();
     }
 

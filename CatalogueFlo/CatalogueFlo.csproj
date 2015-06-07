@@ -667,6 +667,12 @@
     <Content Include="bower_components\velocity\velocity.min.js" />
     <Content Include="bower_components\velocity\velocity.ui.js" />
     <Content Include="bower_components\velocity\velocity.ui.min.js" />
+    <Content Include="css\dialog.css">
+      <DependentUpon>dialog.less</DependentUpon>
+    </Content>
+    <Content Include="css\dialog.min.css">
+      <DependentUpon>dialog.css</DependentUpon>
+    </Content>
     <Content Include="css\dropbox.css">
       <DependentUpon>dropbox.less</DependentUpon>
     </Content>
@@ -1044,6 +1050,10 @@
     </Content>
     <Content Include="css\tile.css.map">
       <DependentUpon>tile.css</DependentUpon>
+    </Content>
+    <Content Include="css\dialog.less" />
+    <Content Include="css\dialog.css.map">
+      <DependentUpon>dialog.css</DependentUpon>
     </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
