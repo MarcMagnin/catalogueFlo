@@ -692,12 +692,25 @@
     <Content Include="css\ressources.min.css">
       <DependentUpon>ressources.css</DependentUpon>
     </Content>
+    <Content Include="css\search.css">
+      <DependentUpon>search.less</DependentUpon>
+    </Content>
+    <Content Include="css\search.min.css">
+      <DependentUpon>search.css</DependentUpon>
+    </Content>
     <Content Include="css\tile.css">
       <DependentUpon>tile.less</DependentUpon>
     </Content>
     <Content Include="css\tile.min.css">
       <DependentUpon>tile.css</DependentUpon>
     </Content>
+    <Content Include="css\toolbar.css">
+      <DependentUpon>toolbar.less</DependentUpon>
+    </Content>
+    <Content Include="css\toolbar.min.css">
+      <DependentUpon>toolbar.css</DependentUpon>
+    </Content>
+    <Content Include="images\close.svg" />
     <Content Include="index.html" />
     <Content Include="ItemModal.tmpl.html" />
     <Content Include="js\app.js" />
@@ -1054,6 +1067,14 @@
     <Content Include="css\dialog.less" />
     <Content Include="css\dialog.css.map">
       <DependentUpon>dialog.css</DependentUpon>
+    </Content>
+    <Content Include="css\toolbar.less" />
+    <Content Include="css\toolbar.css.map">
+      <DependentUpon>toolbar.css</DependentUpon>
+    </Content>
+    <Content Include="css\search.less" />
+    <Content Include="css\search.css.map">
+      <DependentUpon>search.css</DependentUpon>
     </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

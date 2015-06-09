@@ -1,10 +1,7 @@
 ﻿@import "ressources";
 
 .tileContainer {
-    height: ~"-moz-calc(100% - 115px) " !important;
-    height: ~"-webkit-calc(100% - 115px)" !important;
-    height: ~"-o-calc(100% - 115px)" !important;
-    height: ~"calc(100% - 115px)" !important;
+    height: 100%;
     overflow: auto;
     -webkit-box-sizing: content-box !important;
     -moz-box-sizing: content-box !important;
@@ -44,6 +41,7 @@
 }
 
 .tile {
+    position: relative;
     max-height: 300px;
     max-width: 300px;
     margin: 0 0 30px 35px;
@@ -70,13 +68,28 @@
 }
 
 .tile-image {
-        max-height: 300px;
+    max-height: 300px;
     max-width: 300px;
+    padding-bottom: 5px;
+
     > img {
-            max-height: 300px;
-    max-width: 300px;
+        max-height: 300px;
+        max-width: 300px;
         -webkit-border-radius: 2px;
         -moz-border-radius: 2px;
         border-radius: 2px;
     }
+}
+
+
+.close {
+    position: absolute;
+    background:none;
+    border:none;
+}
+
+.delete-button{
+    height:30px;
+    width:30px;
+      color: white;
 }

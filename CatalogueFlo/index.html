@@ -11,13 +11,15 @@
     <link href="css/fontawesome.min.css" rel="stylesheet" />
     <link href="css/dropbox.min.css" rel="stylesheet" />
     <link href="css/dialog.min.css" rel="stylesheet" />
+    <link href="css/toolbar.min.css" rel="stylesheet" />
+    <link href="css/search.min.css" rel="stylesheet" />
     <link href="css/main.min.css" rel="stylesheet" />
 
 </head>
 
 
 
-<body ng-app="Catalogue" ng-controller="catalogueAdm" ng-init="init()">
+<body ng-app="Catalogue" ng-controller="catalogueAdm" ng-init="init()" ng-keydown="keyDown($event)" ng-keyup="keyUp($event)">
     <script type="text/ng-template" id="SearchTemplate.html">
         <a>
             <span bind-html-unsafe="match.model.Val | typeaheadHighlight:query"></span>
@@ -27,24 +29,19 @@
         <button class="btn btn-success" ng-click="add($event)">
             +
         </button>
-    </div>
-
-    <div id="searchbutton" style="z-index:50">
-        <div id="searchIcon" class="md-icon-container ">
-            <md-icon md-svg-src="images/search.svg"></md-icon>
-        </div>
-        <p class="toobar-button-label">Recherche</p>
         <input type="text"
                id="search2"
-               ng-model='searchedText'
+               ng-model='searchedText.Val'
                ng-change='validateSearch($viewValue)'
                typeahead="val as val.Val for val in searchSuggestions($viewValue)"
                typeahead-loading="loadingSearchSuggestions"
                typeahead-template-url="SearchTemplate.html"
                typeahead-wait-ms="300"
                typeahead-on-select="validateSearch($viewValue)"
-               class="form-control form-control-inline transparentInput searchBar" />
+               class="search" />
     </div>
+
+
 
     <div id="Container" class="tileContainer drop-box u-fancy-scrollbar"
          ng-file-drop ng-model="files"
@@ -54,7 +51,7 @@
         <div class="mix tile {{item.filter}}" ng-repeat="item in items" ng-click="select(item, $event)">
             <button class="close close-override" title="supprimer"
                     ng-click="delete(item, $event)">
-                <i>X</i>
+                <img class="delete-button" src="images/close.svg" />
             </button>
 
             <img ng-src="{{::apiRootUrl}}/{{item.Image}}" class="tile-image"></img>

@@ -18,8 +18,8 @@ app.controller("catalogueAdm", function ($scope, $rootScope, $http, $timeout, $q
     $scope.items = [];
     $scope.tags = [];
     $scope.searchPattern = "*";
-
-
+    $scope.searchedText = {};
+    $scope.searchedText.Val = "";
     $scope.init = function () {
         itemAdded = 0;
 
@@ -245,15 +245,8 @@ app.controller("catalogueAdm", function ($scope, $rootScope, $http, $timeout, $q
         $scope.searchTimeout = setTimeout(function () {
             var searchPattern;
 
-            var aim = ""
-
             if ($scope.searchedText.Val) {
-                var aim = $scope.searchedText.Val;
-            } else if ($scope.searchedText) {
-                aim = $scope.searchedText;
-            }
-            if (aim) {
-                $scope.searchPatternRecherche = aim.split(" ").map(function (val) {
+                $scope.searchPatternRecherche = $scope.searchedText.Val.split(" ").map(function (val) {
                     return '[class*=\'f-' + cleanString(val) + '\']';
                 }).join('');
             }
@@ -273,7 +266,6 @@ app.controller("catalogueAdm", function ($scope, $rootScope, $http, $timeout, $q
         else {
             $scope.searchPattern = searchPattern;
         }
-        console.log("Search" + $scope.searchPattern)
         filter();
     }
 
@@ -318,7 +310,80 @@ app.controller("catalogueAdm", function ($scope, $rootScope, $http, $timeout, $q
     }
     $scope.validateSearchFromLivre = function ($item, $model, $label) {
         if ($item.Auteur && $item.Auteur.Nom.toLowerCase().indexOf($scope.searchSuggestionsValue.toLowerCase()) > -1 || $item.Auteur.Prenom.toLowerCase().indexOf($scope.searchSuggestionsValue.toLowerCase()) > -1) {
-            $scope.searchedText = $item.Auteur.Prenom + " " + $item.Auteur.Nom;
+            $scope.searchedText.Val = $item.Auteur.Prenom + " " + $item.Auteur.Nom;
         }
+    }
+
+    $scope.searchFocused = false;
+    // Prevent default browser behavior if back key pressed
+    $(".search").focusout(function ($event) {
+        $scope.searchFocused = false;
+    });
+
+
+    $scope.keyDown = function ($event) {
+    console.log($event.keyCode)        
+        // prevent search when dialog control is open
+        if ($('.md-dialog-container') && $('.md-dialog-container').length != 0) {
+            return;
+        }
+        if (searchToggled && $scope.searchFocused)
+            return;
+
+        $("#search2").focus();
+        $scope.searchFocused = true;
+        if ($event.keyCode != 8 && $event.keyCode != 27) {
+            
+            $scope.toggleSearch();
+
+        }
+        
+
+        
+
+    }
+
+    var searchToggled = false;
+    $scope.keyUp = function ($event) {
+        // prevent search when dialog control is open
+        if ($('.md-dialog-container') && $('.md-dialog-container').length != 0) {
+            $event.preventDefault();
+            return;
+        }
+        if ($event.keyCode == 27) {
+            $timeout(function () {
+                
+                $scope.searchedText.Val = "";
+                $("#search2").val('');
+                $scope.validateSearch("");
+                $scope.closeSearch();
+            })
+           
+            return;
+        }
+            if ($("#search2").val().length == 0) {
+
+                $scope.validateSearch("");
+                $scope.closeSearch();
+                return;
+            }
+        
+
+       
+    }
+
+    $scope.toggleSearch = function () {
+        if (searchToggled)
+            return;
+        searchToggled = true;
+
+        $("#search2").addClass("toggled");
+    }
+
+
+    $scope.closeSearch = function () {
+        $("#search2").removeClass("toggled");
+        $("#search2").blur();
+        searchToggled = false;
     }
 });
