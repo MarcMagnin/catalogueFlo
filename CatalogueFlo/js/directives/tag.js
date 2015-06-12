@@ -8,16 +8,21 @@ app.directive('tag', function ($http, $rootScope) {
             fieldname: '=',
         },
         template:
+            '<div class="tags-directive">' +
              ' <label class="control-label">{{fieldname}}</label>' +
             '<div class="tags">' +
-                '<button class="tag" ng-repeat="(idx, tag) in item[fieldname] track by $index" ng-click="remove(idx)">{{tag}}</button>' +
+                '<button class="tag-button repeat-item" ng-repeat="(idx, tag) in item[fieldname] track by $index" ng-click="remove(idx)">'+
+        '{{tag}}' +
+        '<md-icon class="md-icon filter-terms-icon" md-svg-src="images/close.svg"></md-icon>'+
+'</button>' +
             '</div>' +
              '<p><input type="text" ' +
                 'ng-model="new_value"' +
                 'typeahead="tags.Val for tags in getData($viewValue) | filter:$viewValue" ' +
                 'typeahead-loading="loading" ' +
                 'typeahead-on-select="onSelect($item, $model, $label)"' +
-                'class="form-control"></input></p>',
+                'class="input"></input></p>'+
+            '</div>',
         //'<i ng-show="loading" class="glyphicon glyphicon-refresh"></i> ' +
         //'<a class="btn" ng-click="add()">Ajouter</a>'
 

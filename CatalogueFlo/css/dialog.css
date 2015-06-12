@@ -1,11 +1,13 @@
 ﻿md-dialog {
-  background: #561aff;
+  background: #535353 !important;
+  max-width: 700px;
+  width: 80%;
 }
 .modal-backdrop {
   position: absolute;
   top: 0;
   right: 0;
   left: 0;
-  background-color: #000;
+  background-color: #000!important;
 }
 /*# sourceMappingURL=dialog.css.map */

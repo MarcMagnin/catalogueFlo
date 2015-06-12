@@ -667,6 +667,12 @@
     <Content Include="bower_components\velocity\velocity.min.js" />
     <Content Include="bower_components\velocity\velocity.ui.js" />
     <Content Include="bower_components\velocity\velocity.ui.min.js" />
+    <Content Include="css\angularcCleaned.css">
+      <DependentUpon>angularcCleaned.less</DependentUpon>
+    </Content>
+    <Content Include="css\angularcCleaned.min.css">
+      <DependentUpon>angularcCleaned.css</DependentUpon>
+    </Content>
     <Content Include="css\dialog.css">
       <DependentUpon>dialog.less</DependentUpon>
     </Content>
@@ -680,6 +686,12 @@
       <DependentUpon>dropbox.css</DependentUpon>
     </Content>
     <Content Include="css\fontawesome.min.css" />
+    <Content Include="css\icon.css">
+      <DependentUpon>icon.less</DependentUpon>
+    </Content>
+    <Content Include="css\icon.min.css">
+      <DependentUpon>icon.css</DependentUpon>
+    </Content>
     <Content Include="css\main.css">
       <DependentUpon>main.less</DependentUpon>
     </Content>
@@ -697,6 +709,12 @@
     </Content>
     <Content Include="css\search.min.css">
       <DependentUpon>search.css</DependentUpon>
+    </Content>
+    <Content Include="css\tags.css">
+      <DependentUpon>tags.less</DependentUpon>
+    </Content>
+    <Content Include="css\tags.min.css">
+      <DependentUpon>tags.css</DependentUpon>
     </Content>
     <Content Include="css\tile.css">
       <DependentUpon>tile.less</DependentUpon>
@@ -1075,6 +1093,18 @@
     <Content Include="css\search.less" />
     <Content Include="css\search.css.map">
       <DependentUpon>search.css</DependentUpon>
+    </Content>
+    <Content Include="css\icon.less" />
+    <Content Include="css\icon.css.map">
+      <DependentUpon>icon.css</DependentUpon>
+    </Content>
+    <Content Include="css\tags.less" />
+    <Content Include="css\tags.css.map">
+      <DependentUpon>tags.css</DependentUpon>
+    </Content>
+    <Content Include="css\angularcCleaned.less" />
+    <Content Include="css\angularcCleaned.css.map">
+      <DependentUpon>angularcCleaned.css</DependentUpon>
     </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

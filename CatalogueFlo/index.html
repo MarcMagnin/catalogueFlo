@@ -13,6 +13,8 @@
     <link href="css/dialog.min.css" rel="stylesheet" />
     <link href="css/toolbar.min.css" rel="stylesheet" />
     <link href="css/search.min.css" rel="stylesheet" />
+    <link href="css/tags.min.css" rel="stylesheet" />
+    <link href="bower_components/angular-material/modules/js/icon/icon.min.css" rel="stylesheet" />
     <link href="css/main.min.css" rel="stylesheet" />
 
 </head>
@@ -26,8 +28,8 @@
         </a>
     </script>
     <div class="toolbar">
-        <button class="btn btn-success" ng-click="add($event)">
-            +
+        <button class="clear-button add-button" ng-click="add($event)">
+            <ng-md-icon icon="add_box" size="48"></ng-md-icon>
         </button>
         <input type="text"
                id="search2"
@@ -49,12 +51,15 @@
          allow-dir="false" accept="image/*"
          ng-file-change="addByDragAndDrop($files, $event)">
         <div class="mix tile {{item.filter}}" ng-repeat="item in items" ng-click="select(item, $event)">
-            <button class="close close-override" title="supprimer"
+
+            <button class="clear-button" title="supprimer"
                     ng-click="delete(item, $event)">
-                <img class="delete-button" src="images/close.svg" />
+                <!--<md-icon class="delete-button" md-svg-src="images/close.svg" />-->
+                <ng-md-icon class="delete-button" icon="close" size="28"></ng-md-icon>
             </button>
 
-            <img ng-src="{{::apiRootUrl}}/{{item.Image}}" class="tile-image"></img>
+            <ng-md-icon ng-hide="item.Image" class="image-placehoder" icon="image" size="88"></ng-md-icon>
+            <img ng-show="item.Image" ng-src="{{::apiRootUrl}}/{{item.Image}}" class="tile-image"></img>
         </div>
     </div>
 
@@ -70,11 +75,14 @@
     <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
 
     <!-- material -->
-    <script src="js/hammer.js"></script>
+    <script src="bower_components/angular-material/angular-material.min.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.min.js"></script>
+    <!--<script src="js/hammer.js"></script>
     <script src="bower_components/angular-material/modules/js/core/core.min.js"></script>
     <script src="bower_components/angular-material/modules/js/backdrop/backdrop.min.js"></script>
     <script src="bower_components/angular-material/modules/js/dialog/dialog.min.js"></script>
-
+    <script src="bower_components/angular-material/modules/js/icon/icon.min.js"></script>-->
+    <script src="bower_components/angular-material-icons/angular-material-icons.min.js"></script>
     <!-- app -->
     <script src="js/tools.js"></script>
     <script src="js/app.js"></script>

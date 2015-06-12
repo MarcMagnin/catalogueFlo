@@ -23,8 +23,7 @@
   -webkit-align-items: flex-start;
   -ms-flex-align: start;
   align-items: flex-start;
-  -ms-touch-action: pan-x pan-y !important;
-  touch-action: pan-x pan-y !important;
+  padding: 40px;
 }
 .tileContainer .item,
 .tileContainer .gap {
@@ -69,14 +68,26 @@
   -moz-border-radius: 2px;
   border-radius: 2px;
 }
-.close {
+.clear-button {
   position: absolute;
   background: none;
   border: none;
 }
-.delete-button {
-  height: 30px;
-  width: 30px;
+.add-button {
   color: white;
+  left: 10px;
+  top: 10px;
+  z-index: 10;
+  opacity: 0.7;
+}
+.delete-button {
+  height: 25px;
+  width: 25px;
+  color: white;
+}
+.image-placehoder {
+  color: #808080;
+  margin: 30px;
+  opacity: 0.5;
 }
 /*# sourceMappingURL=tile.css.map */
