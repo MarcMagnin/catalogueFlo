@@ -35,17 +35,19 @@ app.controller("catalogueAdm", function ($scope, $rootScope, $http, $timeout, $q
                   item.filter = "";
                   item.Id = item['@metadata']['@id'];
 
-                  console.log(item.Auteurs);
+                  if (item.Auteurs) {
+                      item.filter += item.Auteurs.map(function (val) {
+                          return 'f-' + cleanString(val);
+                      }).join(' ');
+                  }
+                  
+                  if (item.Tags) {
+                      item.filter += " " + item.Tags.map(function (val) {
+                          return 'f-' + cleanString(val);
+                      }).join(' ');
+                  }
 
-                  item.filter += item.Auteurs.map(function (val) {
-                      return 'f-' + cleanString(val);
-                  }).join(' ');
-
-
-                  item.filter += " " + item.Tags.map(function (val) {
-                      return 'f-' + cleanString(val);
-                  }).join(' ');
-
+                  
                   $scope.items.push(item);
                   if ($scope.items.length == 23) {
                       $scope.$apply();
