@@ -51,11 +51,8 @@
          allow-dir="false" accept="image/*"
          ng-file-change="addByDragAndDrop($files, $event)">
         <div class="mix tile {{item.filter}}" ng-repeat="item in items" ng-click="select(item, $event)">
-
-            <button class="clear-button" title="supprimer"
-                    ng-click="delete(item, $event)">
-                <!--<md-icon class="delete-button" md-svg-src="images/close.svg" />-->
-                <ng-md-icon class="delete-button" icon="close" size="28"></ng-md-icon>
+            <button class="delete-button" ng-click="delete(item, $event)">
+                <md-icon class="md-icon" md-svg-src="images/close.svg"></md-icon>
             </button>
 
             <ng-md-icon ng-hide="item.Image" class="image-placehoder" icon="image" size="88"></ng-md-icon>
@@ -75,8 +72,9 @@
     <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
 
     <!-- material -->
-    <script src="bower_components/angular-material/angular-material.min.js"></script>
     <script src="bower_components/angular-animate/angular-animate.min.js"></script>
+    <script src="bower_components/angular-aria/angular-aria.min.js"></script>
+    <script src="bower_components/angular-material/angular-material.min.js"></script>
     <!--<script src="js/hammer.js"></script>
     <script src="bower_components/angular-material/modules/js/core/core.min.js"></script>
     <script src="bower_components/angular-material/modules/js/backdrop/backdrop.min.js"></script>

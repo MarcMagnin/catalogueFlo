@@ -13,7 +13,7 @@ app.directive('tag', function ($http, $rootScope) {
             '<div class="tags">' +
                 '<button class="tag-button repeat-item" ng-repeat="(idx, tag) in item[fieldname] track by $index" ng-click="remove(idx)">'+
         '{{tag}}' +
-        '<md-icon class="md-icon filter-terms-icon" md-svg-src="images/close.svg"></md-icon>'+
+        '<md-icon class="md-icon tag-remove-icon" md-svg-src="images/close.svg"></md-icon>' +
 '</button>' +
             '</div>' +
              '<p><input type="text" ' +

@@ -1,8 +1,4 @@
-﻿.tags-directive {
-  margin-left: 20px;
-  margin-right: 20px;
-}
-.input {
+﻿.input {
   display: block;
   height: 38px;
   width: 100%;
@@ -29,8 +25,26 @@
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
 }
+.tag-remove-icon {
+  opacity: 0.5;
+  height: 13px;
+  width: 13px;
+  margin-left: 5px;
+}
 .tag-button {
+  display: inline-flex;
+  -webkit-box-align: center;
+  -webkit-flex-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  text-align: center;
   margin-right: 3px;
+  margin-bottom: 3px;
   background-color: rgba(199, 179, 255, 0.1);
   color: white;
   border-radius: 3px;
@@ -51,6 +65,7 @@
 }
 .tag-button:hover {
   background-color: rgba(162, 128, 255, 0.8);
+  color: #333;
 }
 .animate-show.ng-hide-add.ng-hide-add-active,
 .animate-show.ng-hide-remove.ng-hide-remove-active {

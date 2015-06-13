@@ -1,6 +1,7 @@
 ﻿@import "ressources";
 .search{
   position: absolute;
+  pointer-events:none;
   top: 50%;
   left: 50%;
   -moz-transform: translate(-50%,-50%);
@@ -27,6 +28,7 @@
     -webkit-transition: all 0.1s ease;
     transition: all 0.1s ease;
   &.toggled {
+      pointer-events:auto;
     width: 350px;
     opacity: 1;
 }}

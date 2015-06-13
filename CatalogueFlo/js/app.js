@@ -1,4 +1,4 @@
-﻿var app = angular.module('Catalogue', ['angularFileUpload', "ui.bootstrap", 'material.components.dialog', 'ngMdIcons']);
+﻿var app = angular.module('Catalogue', ['angularFileUpload', "ui.bootstrap", "ngMaterial", 'ngAnimate', 'ngMdIcons']);
 
 //app.config(function ($rootScope) {
    
