@@ -11,12 +11,6 @@
                     <ng-md-icon class="delete-button" icon="close" size="28"></ng-md-icon>
                 </button>
 
-                <div layout="column" layout-align="center center">
-                    <h1 class="modal-title title" style="margin-top:12px">
-                        {{::selectedItem.Prenom}} {{::selectedItem.Nom|uppercase}}
-                    </h1>
-                </div>
-
                 <tag item="selectedItem" entityname="'Item'" fieldname="'Auteurs'"></tag>
                 <tag item="selectedItem" entityname="'Item'" fieldname="'Tags'"></tag>
                 <div ng-file-drop ng-model="files" class="drop-box drop-zone clickable form-control" drag-over-class="dragover" multiple="false"
